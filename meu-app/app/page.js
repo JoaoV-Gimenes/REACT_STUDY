@@ -47,7 +47,7 @@ function MyButton(){
 export default function Home() {
   return (
     <>
-      <h1>welcome home</h1>
+      <h1 className="Entrada">welcome home</h1>
       {user.IsLoggedIn ? (
           <Texto1/>
         ) : (

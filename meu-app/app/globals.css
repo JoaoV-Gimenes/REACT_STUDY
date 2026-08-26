@@ -1,4 +1,9 @@
-.Entrada{
-    background-color: black;
-    color: white;
+.Square {
+    width: 30px;
+    height: 30px;
+    border-radius: 0px;
+    box-sizing: border-box;
+}
+.SquareLines{
+    display: flex;
 }

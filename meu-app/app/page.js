@@ -2,69 +2,33 @@
 
 import { useState } from "react";
 
-const user = {
-  nome:"João",
-  idade: "18",
-  IsLoggedIn: false,
-}
+function Square(){
+  const [Letra, setLetra] = useState(null);
 
-const Texto1 = () =>(
-  <h1>{user.nome}, {user.idade} years old</h1>
-)
-
-const Texto2 = () =>(
-  <h1>Usuário não cadastrado</h1>
-)
-
-// ####################################################
-
-const Itens = [
-  {tittle: "alface" , id: "1", temSemente: false},
-  { tittle: "tomate", id: "2", temSemente: true },
-  { tittle: "cebola", id: "3", temSemente: false }
-]
-
-const ListItems = Itens.map(Itens => 
-  <li key={Itens.id} style={{color: Itens.temSemente ? "grey" : "red"}}>
-    {Itens.tittle}
-  </li>
-)
-
-// ####################################################
-
-function MyButton(){
-  const [count, setCount] = useState(0);
-
-  const handleclick= () => (
-    setCount(count + 1)
+  const handleClick = () => (
+    setLetra('X')
   )
-
+  return <button className="Square" onClick={handleClick}>{Letra}</button>
+}
+export default function Board(){
   return(
-    <button onClick={handleclick}>Click {count} times</button>
-  )
-}
-
-export default function Home() {
-  return (
     <>
-      <h1 className="Entrada">welcome home</h1>
-      {user.IsLoggedIn ? (
-          <Texto1/>
-        ) : (
-          <Texto2/>
-        )}
+      <div className="SquareLines">
+        <Square />
+        <Square />
+        <Square />
 
-        {/* ################################################# */}
-
-        <ul>{ListItems}</ul>
-
-        {/* ################################################# */}
-        
-        <MyButton/>
-
-        {/* ################################################# */} 
-
-
+      </div>
+      <div className="SquareLines">
+        <Square />
+        <Square />
+        <Square />
+      </div>
+      <div className="SquareLines">
+        <Square />
+        <Square />
+        <Square />
+      </div>
     </>
-  );
+  )
 }

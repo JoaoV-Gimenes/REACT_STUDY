@@ -5,9 +5,8 @@ import { useState } from "react";
 function Square({value, onSquareclick}){
   return <button className="Square" onClick={onSquareclick}>{value}</button>
 }
-export default function Board(){
-  const [xIsNext, setXIsNext] = useState(true);
-  const [seq, setSeq] = useState(Array(9).fill(null));
+
+function Board({xIsNext, seq, onPlay}){
 
   function handleClick(i){
     if (seq[i] || calculateWinner(seq)){
@@ -19,8 +18,7 @@ export default function Board(){
     } else {
       nextSquare[i] = "O";
     }
-    setSeq(nextSquare);
-    setXIsNext(!xIsNext);
+    onPlay(nextSquare);
   }
 
   function calculateWinner(seq){
@@ -49,13 +47,13 @@ export default function Board(){
   if (Winner){
     status = "Winner: " + Winner;
   } else{
-    status = "Next player: " + (xIsNext ? "X" : "O  ");
+    status = "Next player: " + (xIsNext ? "X" : "O");
   }
 
   return(
     <>
-      <section className="Game">
-        <div className="Status" style={{color: Winner ? "green" : "white"}}>{status}</div>
+      <section className="Board">
+        <div className="Status" style={{color: Winner ? "green" : "black"}}>{status}</div>
         <div className="SquareLines">
           <Square value={seq[0]} onSquareclick={() => handleClick(0)}/>
           <Square value={seq[1]} onSquareclick={() => handleClick(1)}/>
@@ -74,5 +72,51 @@ export default function Board(){
         </div>
       </section>
     </>
+  )
+}
+
+export default function Game(){
+  const [history, setHistory] = useState([Array(9).fill(null)]);
+  const [currentMove, setCurrentMove] = useState(0);
+  const xIsNext = currentMove %2 == 0
+  const currentSquares = history[currentMove];
+  
+  
+  function handlePlay(nextSquare){
+    const nextHistory = [...history.slice(0, currentMove + 1), nextSquare];
+    setHistory(nextHistory);
+    setCurrentMove(nextHistory.length-1);
+  }
+
+  function jumpTo(nextMove){
+    setCurrentMove(nextMove);
+  }
+
+  const moves = history.map((seq, move) =>{
+    let description;
+    if (move > 0){
+      description = "Go to move #" + move
+    } else {
+      description = "Restart"
+    }
+
+    return(
+      <li key= {move}>
+        <button onClick={() => jumpTo(move)} className="timeTravelButton">{description}</button>
+      </li>
+    )
+  })
+
+  return(
+    <div className="game">
+      <div className="game-board">
+        <Board xIsNext={xIsNext} seq={currentSquares} onPlay={handlePlay}/>
+      </div>
+      <div className="game-info">
+        <ol>
+          {moves}
+        </ol>
+      </div>
+    </div>
   )
 }

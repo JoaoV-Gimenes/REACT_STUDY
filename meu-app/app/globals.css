@@ -8,8 +8,8 @@
     display: flex;
 }
 
-.Game{
-    color: white;
+.Board{
+    color: black;
     margin: 0;
     padding: 20px;
     display: flex;
@@ -19,5 +19,9 @@
 }
 
 Body{
-    background-color: black;
+    background-color: white;
+}
+
+.timeTravelButton{
+    color: black;
 }

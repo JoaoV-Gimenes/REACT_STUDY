@@ -53,7 +53,8 @@ function Board({xIsNext, seq, onPlay}){
   return(
     <>
       <section className="Board">
-        <div className="Status" style={{color: Winner ? "green" : "black"}}>{status}</div>
+        <h1 style={{color: "white"}}>Tic-Tac-Toe</h1>
+        <div className="Status" style={{color: Winner ? "green" : "white", padding: "10px"}}>{status}</div>
         <div className="SquareLines">
           <Square value={seq[0]} onSquareclick={() => handleClick(0)}/>
           <Square value={seq[1]} onSquareclick={() => handleClick(1)}/>
@@ -113,6 +114,7 @@ export default function Game(){
         <Board xIsNext={xIsNext} seq={currentSquares} onPlay={handlePlay}/>
       </div>
       <div className="game-info">
+        <h2>Time Travel</h2>
         <ol>
           {moves}
         </ol>

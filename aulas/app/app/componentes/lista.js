@@ -3,13 +3,14 @@
 import {useState} from 'react';
 import BotaoAdd from './BotAdd';
 
+{/* Quando apertar o botão adicionar, adicionar dados em uma lista(na tela) e exibí-la na tela, além de resetar os inputs*/}
 export default function Lista({UserInput, dados}) {
-    const adicionar = (valor) => setTrecos(valorAntigo => [...valorAntigo, valor])
+
+  const adicionar = () => {dados.map((texto) => <li key={texto}>{texto}</li>)}
   return (
     <>
-        <BotaoAdd Func={() => adicionar(UserInput)}/>
         <ul>
-            {dados.map((texto) => <li key={texto}>{texto}</li>)}
+            <BotaoAdd Func={() => adicionar(UserInput)} nomeBotao='Adicionar'/>
         </ul>
     </>
   );

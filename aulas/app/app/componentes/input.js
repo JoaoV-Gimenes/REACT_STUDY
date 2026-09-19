@@ -1,12 +1,12 @@
 'use client';
 
-export default function Input({ UserInput, nomeObj, onChange }){
-    
+export default function Input({ Placeholder, UserInput, Name, onChange}){
     return(
         <>
-            <input placeholder="Nome"
+            <input placeholder= {Placeholder}
                 value={UserInput}
-                onChange={digitado => onChange(nomeObj, digitado.target.value)}
+                name={Name}
+                onChange={onChange}
                 className='border border-grey-300 rounded px-3 py-2'>
             </input>
         </>

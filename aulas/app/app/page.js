@@ -4,6 +4,7 @@ import Lista from './componentes/lista';
 import Input from './componentes/input';
 import BotFiltrar from './componentes/botFiltrar';
 import {useState} from 'react';
+import BotaoAdd from './componentes/BotAdd';
 
 export default function Home() {
   const [Contatos, setContatos] = useState([])
@@ -14,6 +15,14 @@ export default function Home() {
       setDados((valoranterior) => ({...valoranterior, [name] : value}));
   }
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!dados.nome.trim()) return;
+    onAdd({ ...dados, id: Date.now() });
+    setDados({ nome: "", email: "", telefone: "" });
+  };
+
+
   return (
     <>
       <header>
@@ -21,28 +30,23 @@ export default function Home() {
         <BotFiltrar/>
       </header>
 
-      <form>
+      <form onSubmit={handleSubmit}>
         <label>Nome</label>
           {/* inputs que atualizam o objeto dados */}
-        <Input UserInput={dados.nome} Name="nome" Placeholder='Nome' onChange={handleChange}/>
+        <Input UserInput={dados.nome} Name="nome" Placeholder='Nome' onChange={handleChange} />
 
         <label>Email</label>
-        <Input 
-          UserInput={email} 
-          nomeObj="email" 
-          aoMudar={() => atualizaDados('email', email)} 
-          Placeholder='email'/>
+        <Input UserInput={dados.email} Name="email" Placeholder='Email' onChange={handleChange} tipo="email"/>
 
         <label>Celular</label>
-        <Input 
-          UserInput={celular} 
-          nomeObj="celular" 
-          aoMudar={() => atualizaDados('celular', celular)} 
-          Placeholder='celular' />
+        <Input UserInput={dados.celular} Name="celular" Placeholder='Celular' onChange={handleChange} tipo=""/>
 
+        <BotaoAdd nomeBotao='Adicionar' tipo="submit" />
       </form>
-      {/* Quando apertar o botão adicionar, adicionar dados em uma lista(na tela) e exibí-la na tela, além de resetar os inputs*/}
-      <Lista dados={dados} />
+
+      <section>
+
+      </section>
     </>
   );
 }

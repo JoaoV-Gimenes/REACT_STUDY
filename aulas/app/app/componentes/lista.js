@@ -1,17 +1,21 @@
 'use client';
 
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import BotaoAdd from './BotAdd';
 
 {/* Quando apertar o botão adicionar, adicionar dados em uma lista(na tela) e exibí-la na tela, além de resetar os inputs*/}
-export default function Lista({UserInput, dados}) {
-
-  const adicionar = () => {dados.map((texto) => <li key={texto}>{texto}</li>)}
+export default function Lista({ dados, onRemove }) {
   return (
     <>
-        <ul>
-            <BotaoAdd Func={() => adicionar(UserInput)} nomeBotao='Adicionar'/>
-        </ul>
+      <ul>
+          <li>
+            <div>
+              <h3>{dados.nome}</h3>
+              <p>{dados.email} - {dados.celular}</p>
+            </div>
+          </li>
+      </ul>
+      <button onClick={() => onRemove(dados.id)}>Excluir</button>
     </>
   );
 }

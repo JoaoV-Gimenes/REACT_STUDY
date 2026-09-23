@@ -1,8 +1,8 @@
 'use client'
 
-export default function BotaoAdd({Func, nomeBotao}){
+export default function BotaoAdd({Func, nomeBotao, tipo}){
 
-    const BotaoAdd = ({ n, nomeBotao }) => <button className="bg-orange-700 py-4 px-2 hover:bg-amber-500 rounded" onClick={n}>{nomeBotao}</button>
+    const BotaoAdd = ({ n, nomeBotao }) => <button className="bg-orange-700 py-4 px-2 hover:bg-amber-500 rounded" onClick={n} type={tipo}>{nomeBotao}</button>
     
     return(
         <>
